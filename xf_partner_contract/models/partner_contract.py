@@ -242,13 +242,15 @@ class PartnerContract(models.Model):
                 'product_id': line.product_id.name,
                 'label': line.name,
                 'Quantity': line.quantity,
-                'Price': line.price_unit
+                'Price': line.price_unit,
+                'specification': line.specification_id.name
             }
             product.append(lines)
         rec = {
             'form': self.read()[0],
             'partner': partner,
-            'line': product
+            'line': product,
+            'type': self.type
         }
         return self.env.ref('xf_partner_contract.action_print_contract').report_action(self, data=rec)
 

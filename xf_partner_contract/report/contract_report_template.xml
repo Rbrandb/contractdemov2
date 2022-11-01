@@ -1,10 +1,110 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
+        <template id="custom_contract_layout">
+            <div class="header">
+                <div class="row">
+                    <div class="head_cont">
+                    </div>
+                    <div class="head_logo">
+                        <img t-if="res_company.logo"
+                             t-att-src="image_data_uri(res_company.logo)"
+                             alt="logo"
+                             style="height:50px; width:150px; position: absolute; right: 25mm; "/>
+                    </div>
+                </div>
+            </div>
+            <div class="article">
+                <t t-raw="0"/>
+            </div>
+            <div class="footer" style="height:800mm;">
+                <div class="row footer_log">
+
+                    <div class="col-12 footer_phone">
+                        <div style="font-family: revert;font-size: 1.0rem; text-align:center;">
+
+                            € (EURO) TO BANK ACCOUNT NUMBER: IBAN: NL97INGB0007615781, BIC/SWIFT INGBNL2A WITH
+                            REFERENCE TO THE ABOVE MENTIONED INVOICE NUMBER.
+
+                        </div>
+                        <div style="font-family: revert;font-size: 1.0rem; text-align:center;">
+
+                            $ (USD) TO BANK ACCOUNT NUMBER: IBAN: NL76INGB0020040113, BIC/SWIFT INGBNL2A WITH
+                            REFERENCE TO THE ABOVE MENTIONED INVOICE NUMBER.
+
+                        </div>
+                        <div style="font-family: revert;font-size: 1.5rem; text-align:center; font-weight: 900; color: #69C;">
+                            THANK YOU FOR YOUR SUPPORT. WE TRULY APPRECIATE YOUR
+                            <br/>
+                            BUSINESS AND LOOK FORWARD WORKING TOGETHER AGAIN.
+                        </div>
+                        <hr width="100%" style="background-color:#6699CC; margin-top: 2rem;"/>
+                        <!--                    </div>-->
+                        <div class="col-3">
+                            <h4>
+                                <em style="font-style: normal;font-size: 1.5rem; text-align:center; font-weight: 900; color: #69C;">
+                                    THE
+                                </em>
+                                <em style="font-style: normal;font-size: 1.5rem; text-align:center; font-weight: 900; color: #50c878;">
+                                    SUSTAINABLE
+                                </em>
+                                <br/>
+                                <em style="font-style: normal;font-size: 1.5rem; text-align:center; font-weight: 900; color: #69C;">
+                                    OIL, FATS &amp; FUEL
+                                    <br/>
+                                    SOLUTION
+                                </em>
+                            </h4>
+                        </div>
+                        <div class="col-3" style="position: absolute; left: 309px; top: 170px;">
+                            J.A ABRAHAMBOULEVARD 68
+                            <br/>
+                            KRALENDIJK, BONAIRE
+                            <br/>
+                            DUTCH CARIBBEAN
+                        </div>
+                        <div class="col-3" style="position: absolute; left: 604px; top: 167px;">
+                            <em style="font-style: normal; text-align:center; font-weight: 701; color: #69C;">CAMBER OF
+                                COMMERCE:
+                            </em>
+                            12462
+                            <br/>
+                            <em style="font-style: normal; text-align:center; font-weight: 701; color: #69C;">CRIB
+                                NUMBER:
+                            </em>
+                            310023750
+                            <br/>
+                            <em style="font-style: normal; text-align:center; font-weight: 701; color: #69C;">VIHB
+                                REGISTATION NUMBER:
+                            </em>
+                            536189VIHB
+                            <br/>
+                            INFO@GLOBALUCOCOMPANY.COM
+                        </div>
+                        <div class="col-3" style="position: absolute; right: 0px; top: 167px;">
+                            <img src="/xf_partner_contract/static/description/niwo.png" width="100px" height="auto"
+                                 style="padding-right: 12px;"/>
+                            <img src="/xf_partner_contract/static/description/ISCC.png" width="100px" height="auto"
+                                 style="padding-left: 12px;"/>
+                        </div>
+                        <hr width="100%"
+                            style="border-top: 22px solid rgba(0, 0, 0, 0.1); background-color:#6699CC; margin-top: 2rem;"/>
+                    </div>
+                    <div class="col-6">
+                        <div class="footer_web">
+                            <h4>www.protec-dz.com</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+
         <template id="contract_report_template">
             <t t-call="web.html_container">
-                <t t-call="web.external_layout">
-                    <div class="oe_structure">
+                <t t-call="xf_partner_contract.custom_contract_layout">
+                    <div class="page" style="background-image:url('/xf_partner_contract/static/description/back.jpg');
+                        background-size:250mm 280mm; width:250mm; height:255mm; padding-top:20mm;">
                         <div class="text-center">
                             <h2>
                                 <t t-esc="form.get('name')"/>
@@ -13,57 +113,168 @@
                         <div class="text-right">
                             <t t-if="partner.get('name')">
                                 <div>
-                                    Partner : <t t-esc="partner['name']"/>
+                                    Partner :
+                                    <t t-esc="partner['name']"/>
                                 </div>
                             </t>
                             <t t-if="form['date_start']">
                                 <div>
-                                    Start Date: <t t-esc="form['date_start']"/>
+                                    Start Date:
+                                    <t t-esc="form['date_start']"/>
                                 </div>
                             </t>
                             <t t-if="form['date_end']">
                                 <div>
-                                    End Date: <t t-esc="form['date_end']"/>
+                                    End Date:
+                                    <t t-esc="form['date_end']"/>
                                 </div>
                             </t>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <table class="table table-bordered" style="table-layout: fixed" id="hash_config_table">
-                                <thead style="display: table-row-group">
-                                    <tr>
-                                        <th class="text-center" style="width: 20%" scope="col">Sl NO</th>
-                                        <th class="text-center" style="width: 20%" scope="col">Product</th>
-                                        <th class="text-center" style="width: 20%" scope="col">Label</th>
-                                        <th class="text-center" style="width: 20%" scope="col">Quantity</th>
-                                        <th class="text-center" style="width: 20%" scope="col">Price</th>
-                                    </tr>
-                                </thead>
-                                <body>
-                                    <t t-set="i" t-value="1"/>
-                                    <t t-foreach="line" t-as="result">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered" style="table-layout: fixed" id="hash_config_table">
+                                    <thead style="display: table-row-group">
                                         <tr>
-                                            <td>
-                                                <t t-esc="i"/>
-                                            </td>
-                                            <t t-set="i" t-value="i + 1"/>
-                                            <td>
-                                                <t t-esc="result['product_id']"/>
-                                            </td>
-                                            <td>
-                                                <t t-esc="result['label']"/>
-                                            </td>
-                                            <td>
-                                                <t t-esc="result['Quantity']"/>
-                                            </td>
-                                            <td>
-                                                <t t-esc="result['Price']"/>
-                                            </td>
+                                            <th class="text-center" style="width: 20%; border: 1px solid #6699CC;"
+                                                scope="col">Sl NO
+                                            </th>
+                                            <th class="text-center" style="width: 20%; border: 1px solid #6699CC;"
+                                                scope="col">Product
+                                            </th>
+                                            <th class="text-center" style="width: 20%; border: 1px solid #6699CC;"
+                                                scope="col">Label
+                                            </th>
+                                            <th class="text-center" style="width: 20%; border: 1px solid #6699CC;"
+                                                scope="col">Quantity
+                                            </th>
+                                            <th class="text-center" style="width: 20%; border: 1px solid #6699CC;"
+                                                scope="col">Price
+                                            </th>
+                                            <th class="text-center" style="width: 20%; border: 1px solid #6699CC;"
+                                                scope="col">Specification
+                                            </th>
                                         </tr>
-                                    </t>
-                                </body>
-                            </table>
+                                    </thead>
+                                    <body>
+                                        <t t-set="i" t-value="1"/>
+                                        <t t-foreach="line" t-as="result">
+                                            <tr>
+                                                <td style="color: white; background:#6699CC;">
+                                                    <t t-esc="i"/>
+                                                </td>
+                                                <t t-set="i" t-value="i + 1"/>
+                                                <td style="color: white; background:#6699CC;">
+                                                    <t t-esc="result['product_id']"/>
+                                                </td>
+                                                <td style="color: white; background:#6699CC;">
+                                                    <t t-esc="result['label']"/>
+                                                </td>
+                                                <td style="color: white; background:#6699CC;">
+                                                    <t t-esc="result['Quantity']"/>
+                                                </td>
+                                                <td style="color: white; background:#6699CC;">
+                                                    <t t-esc="result['Price']"/>
+                                                </td>
+                                                <td style="color: white; background:#6699CC;">
+                                                    <t t-esc="result['specification']"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </body>
+                                </table>
+                                <div class="row" style="page-break-before:always;
+                                        background-image:url('/xf_partner_contract/static/description/back.jpg');
+                                        background-size:250mm 280mm; width:250mm; height:255mm; padding-top:20mm;">
+                                    <div class="text-left" style="padding-left:30px;">
+                                        <div style="font-weight: bold; font-size: 26px;">
+                                            Documents to be provided by seller
+                                        </div>
+                                        <div style="font-size: 26px;">
+                                            - Commercial invoice
+                                        </div>
+                                        <div style="font-size: 26px;">
+                                            - Annex VII
+                                        </div>
+                                        <div style="font-size: 26px;">
+                                            - Green list waste contract
+                                        </div>
+                                        <div style="font-size: 26px;">
+                                            - Self-declaration; Feedstock is Used Cooking Oil (UCO) of Virgin Vegetable
+                                            Oil (VVO) origin
+                                        </div>
+                                        <div style="font-size: 26px;">
+                                            - ISCC EU Delivery note
+                                        </div>
+                                        <div style="font-size: 26px;">
+                                            - Marine insurance certificate for 110% cargo value covering “All Risks”
+                                        </div>
+                                        <div style="font-size: 26px;">
+                                            - B/L copy, marked freight prepaid inc ship. on board stamped, telex or
+                                            seaway bill
+                                        </div>
+                                        <div style="font-size: 26px;">
+                                            - Weight tickets of each container
+                                        </div>
+                                        <div style="font-size: 26px;">
+                                            - Picture form each load iso or flexi-bag (tank number)
+                                        </div>
+                                        <div style="font-size: 26px;">
+                                            - EUR1 certificate if available
+                                        </div>
+                                        <br/>
+                                        <br/>
+                                        <div style="font-size: 26px;">
+                                            We kindly ask you to return a legally signed copy of this contract to us by
+                                            e-mail.
+                                            In case we don’t receive the legally signed copy of this contract within 2
+                                            working
+                                            days after contract date, we will take this contract as a final acceptance
+                                            of the conditions mentioned.
+                                        </div>
+                                        <div class="row" style="padding-top:50px; font-size: 23px;">
+                                            <div class="col-6">
+                                                <div>
+                                                    <t t-if="type =='sale'">
+                                                        Seller:&amp;nbsp;
+                                                        <t t-esc="res_company.name"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        Buyer:&amp;nbsp;
+                                                        <t t-esc="res_company.name"/>
+                                                    </t>
+                                                </div>
+                                                <div>
+                                                    Date :
+                                                </div>
+                                                <br/>
+                                                <div>
+                                                    Signature :
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div>
+                                                    <t t-if="type =='sale'">
+                                                        Buyer:
+                                                        <t t-esc="partner['name']"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        Seller:&amp;nbsp;
+                                                        <t t-esc="partner['name']"/>
+                                                    </t>
+                                                </div>
+                                                <div>
+                                                    Date :
+                                                </div>
+                                                <br/>
+                                                <div>
+                                                    Signature :
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </t>

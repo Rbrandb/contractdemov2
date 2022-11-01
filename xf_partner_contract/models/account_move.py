@@ -19,6 +19,11 @@ class AccountMove(models.Model):
         ondelete='restrict',
         domain=[('state', '=', 'running')],
     )
+    contract_no = fields.Char(string='Contract Number', related='contract_id.name')
+    # incoterm_id =
+    package_id = fields.Many2one('stock.quant.package', 'Packaging',)
+    country_origin_id = fields.Many2one('res.country', string='Country of origin')
+
 
     # Compute and search fields, in the same order of fields declaration
     # Constraints and onchanges
@@ -69,3 +74,39 @@ class AccountMove(models.Model):
             move.with_context(check_move_validity=False)._onchange_invoice_line_ids()
 
     # Business methods
+
+    def print_custom_invoice(self):
+        product = []
+        for line in self.invoice_line_ids:
+            print('line.container_no', line.container_no)
+            lines = {
+                'product_id': line.product_id.name,
+                'Container': line.container_no,
+                'Quantity': line.quantity,
+                'Price': line.price_unit,
+                'Total': line.price_subtotal
+            }
+            product.append(lines)
+        total = {
+            'total_amount': self.amount_total_signed,
+            'total_qty': sum(self.invoice_line_ids.mapped('quantity'))
+        }
+        rec = {
+            'line': product,
+            'total_amount': self.amount_total_signed,
+            'total_qty': sum(self.invoice_line_ids.mapped('quantity')),
+            'form': self.read()[0],
+            'term': self.invoice_payment_term_id.name,
+            'contract': self.contract_id.name,
+            'incoterm': self.invoice_incoterm_id.name,
+            'package':self.package_id.name,
+            'country': self.country_origin_id.name
+
+        }
+        return self.env.ref('xf_partner_contract.print_custom_invoice').report_action(self, rec, total)
+
+
+class AccountMoveLineInherit(models.Model):
+    _inherit = 'account.move.line'
+
+    container_no = fields.Char(string='Container Number')

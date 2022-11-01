@@ -24,6 +24,19 @@
                         </group>
                     </group>
                 </xpath>
+                <xpath expr="//button[@name='button_cancel']" position="after">
+                    <button name="print_custom_invoice" type="object" string="Print"/>
+                </xpath>
+                <xpath expr="//field[@name='payment_reference']" position="after">
+                    <field name="contract_no"/>
+                    <field name="package_id"/>
+                    <field name="country_origin_id"/>
+                </xpath>
+                <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='quantity']"
+                       position="before">
+                    <field name="container_no"/>
+                </xpath>
+
             </field>
         </record>
     </data>

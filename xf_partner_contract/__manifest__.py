@@ -49,6 +49,7 @@ Manage, approve, renew contracts
         'views/specification.xml',
         'views/document_document.xml',
         'report/contract_report_template.xml',
+        'report/custom_invoice_report_template.xml',
         'views/report.xml'
     ],
     'assets': {
@@ -58,7 +59,7 @@ Manage, approve, renew contracts
 
         ],
     },
-    'depends': ['account', 'documents'],
+    'depends': ['account', 'documents', 'stock'],
     'qweb': [],
     'images': [
         'static/description/xf_partner_contract.png',
