@@ -56,6 +56,7 @@ Manage, approve, renew contracts
         'web.assets_backend': [
             '/xf_partner_contract/static/src/js/document.js',
             '/xf_partner_contract/static/src/js/document_controller_mixin.js',
+            '/xf_partner_contract/static/src/js/side_bar.js'
 
         ],
     },

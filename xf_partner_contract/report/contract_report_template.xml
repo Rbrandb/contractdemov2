@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-6">
                         <div class="footer_web">
-                            <h4>www.protec-dz.com</h4>
+<!--                            <h4>www.protec-dz.com</h4>-->
                         </div>
                     </div>
                 </div>
@@ -109,6 +109,17 @@
                             <h2>
                                 <t t-esc="form.get('name')"/>
                             </h2>
+                        </div>
+                        <div class="text-left" style="position: absolute; top: 147px; font-weight: bold;">
+                            Contract Amount:
+                            <t t-if="form.get('amount')">
+                                    <t t-esc="currency_id"/>
+                                    <t t-esc="form.get('amount')"/>
+                            </t>
+                            <t t-if="form.get('end_units')">
+                                <t t-esc="end_unit"/>
+                                <t t-esc="unit"/>
+                            </t>
                         </div>
                         <div class="text-right">
                             <t t-if="partner.get('name')">

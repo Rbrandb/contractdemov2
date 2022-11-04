@@ -74,7 +74,8 @@
                         <div class="oe_button_box" name="button_box">
                             <button type="object" class="oe_stat_button" icon="fa-pencil-square-o"
                                     name="action_view_invoice"
-                                    context="{'default_contract_id': active_id}">
+                                    context="{'default_contract_id': active_id}"
+                                    attrs="{'invisible':  [('type', '!=', 'sale')]}">
                                 <div class="o_form_field o_stat_info">
                                     <span class="o_stat_value">
                                         <field name="invoice_ids_count"/>
@@ -82,6 +83,19 @@
                                     <span class="o_stat_text">Invoices</span>
                                 </div>
                             </button>
+
+                            <button type="object" class="oe_stat_button" icon="fa-pencil-square-o"
+                                    name="action_view_bills"
+                                    context="{'default_contract_id': active_id}"
+                                    attrs="{'invisible':  [('type', '!=', 'purchase')]}">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="invoice_ids_count"/>
+                                    </span>
+                                    <span class="o_stat_text">Bills</span>
+                                </div>
+                            </button>
+
                             <button name="action_view_document" type="object" class="oe_stat_button"
                                     icon="fa-file-text-o"
                                     attrs="{'invisible':  [('document_count', '=', False)]}">

@@ -250,7 +250,10 @@ class PartnerContract(models.Model):
             'form': self.read()[0],
             'partner': partner,
             'line': product,
-            'type': self.type
+            'type': self.type,
+            'currency_id': self.currency_id.symbol,
+            'unit': self.unit_id.name,
+            'end_unit': self.end_units
         }
         return self.env.ref('xf_partner_contract.action_print_contract').report_action(self, data=rec)
 
@@ -577,6 +580,29 @@ class PartnerContract(models.Model):
             })
         action['context'] = context
         return action
+
+    def action_view_bills(self):
+        self.action_view_invoice()
+        if len(self.invoice_ids) > 1:
+            return {
+                'name': _('Invoice'),
+                'view_mode': 'tree,form',
+                'res_model': 'account.move',
+                'domain': [('id', 'in', self.invoice_ids.ids)],
+                'type': 'ir.actions.act_window',
+            }
+        else:
+            return {
+                'name': _('Invoice'),
+                'view_mode': 'form',
+                'view_type': ' form',
+                'view_id': self.env.ref('account.view_move_form').id,
+                'res_id': self.invoice_ids.id,
+                'res_model': 'account.move',
+                'domain': [('id', 'in', self.invoice_ids.ids)],
+                'type': 'ir.actions.act_window',
+            }
+
 
     # Business methods
 
